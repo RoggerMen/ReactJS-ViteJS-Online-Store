@@ -18,6 +18,18 @@ const Card = ({item}) => {
       context.setProductToShow(productDetail);
   }
 
+  const addProductsToCart = (productData) => {
+    context.setCount(context.count + 1)
+    // Inicialmente tenemos un array vacio en el COMPONENTE "Context" pero que pasa si ya tenemos elementos ENTONCES si nosotros defrente agregamos y ya posiblemente podemos perder la información que ya tenemos
+    // ENTONCES garantizamos de que se ALMACENEN y que siga viviendo lo que ya esta en el carrito
+    // PERO que adicional le sume ese nuevo PRODUCTO que estamos AGREGANDO
+    // LO HACEMOS Con el array[] y el ...(spread operator) lo cual vamos a llamar lo que ya existe en setCartProducts la cual es el cartProducts
+    // DONDE LE DECIMOS que tome lo que ya existe y adicional le vamos a decir que le agregue lo nuevo
+    // LO CUAL LO NUEVO ES el productData = item
+    // ENTONCES LO QUE LE DECIMOS CON ESTE CODIGO ES que queremos que agregue esa información pero que aparte de eso nos deje lo que ya existe
+    context.setCartProducts([...context.cartProducts, productData])
+  }
+
   return (
 
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 my-2"
@@ -25,9 +37,13 @@ const Card = ({item}) => {
         <figure className='relative mb-1 w-full h-4/5 ' >
             <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{item?.category}</span>
             <img className="w-full h-full object-cover rounded-lg"
-            src={item.image} alt={item?.title} />
-            <button className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1" onClick={()=> context.setCount(context.count + 1)}>
-                    <PlusIcon className="size-6 text-black " />
+            src={item?.image} alt={item?.title} />
+
+            <button className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1" onClick={()=> addProductsToCart(item)}>
+
+                    <PlusIcon
+                    className="size-6 text-black " />
+            
             </button>
         </figure>
         <p className="flex justify-between">

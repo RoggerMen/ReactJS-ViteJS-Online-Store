@@ -22,6 +22,11 @@ const ShoppingCartContextProvider = ({children}) => {
   // hacemos que el productShow sea de objeto vacio
   const [productToShow,setProductToShow] = useState({});
 
+  // Shopping Cart - Add products to cart
+  const [cartProducts,setCartProducts] = useState([]);
+  // TAMBIEN PODEMOS HACERLO CON UN "useEffect" PARA VER EL "clg" SOLO CUANDO CAMBIE EL "cartProducts"
+  //console.log("CART: " ,cartProducts)
+
   return (
     <ShoppingCartContext.Provider value={{
         count,
@@ -30,7 +35,9 @@ const ShoppingCartContextProvider = ({children}) => {
         closeProductDetail,
         isProductDetailOpen,
         productToShow,
-        setProductToShow
+        setProductToShow,
+        cartProducts,
+        setCartProducts,
     }}>
         {children}
     </ShoppingCartContext.Provider>
