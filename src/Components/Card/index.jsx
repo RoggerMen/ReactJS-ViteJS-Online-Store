@@ -5,17 +5,27 @@ import { ShoppingCartContext } from "../../Context";
 import { PlusIcon } from '@heroicons/react/24/solid'
 
 const Card = ({item}) => {
-  const imageUrl = item?.images[0]?.replace(/^\[|"|\]$/g, '');
+  //const imageUrl = item?.images[0]?.replace(/^\[|"|\]$/g, '');
 
-  const context = useContext(ShoppingCartContext)
+  const context = useContext(ShoppingCartContext);
+
+  // RECIBIMOS EL AEGUMENTO DE EL "onclick" showProduct(item)
+  const showProduct = (productDetail) => {
+      context.openProductDetail();
+      // AL ESTADO DEL useContext del Componente "Context" le colocamos los datos que se pasan por dicho argumento que vienen a ser objetos 
+      // Segun lo que seleccionemos(para ver el detalle del producto) nos dara distintos datos pero en forma de objetos.
+      // La cual este setProductToShow se ira actualizando al seleccionar o hacer click(onClick) con los DATOS de otra "Card"
+      context.setProductToShow(productDetail);
+  }
 
   return (
 
-    <div className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 my-2">
+    <div className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 my-2"
+    onClick={()=>showProduct(item)}>
         <figure className='relative mb-1 w-full h-4/5 ' >
-            <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{item?.category?.name}</span>
+            <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{item?.category}</span>
             <img className="w-full h-full object-cover rounded-lg"
-            src={imageUrl} alt={item?.title} />
+            src={item.image} alt={item?.title} />
             <button className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1" onClick={()=> context.setCount(context.count + 1)}>
                     <PlusIcon className="size-6 text-black " />
             </button>

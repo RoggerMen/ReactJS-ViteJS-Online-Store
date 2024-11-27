@@ -9,7 +9,10 @@ const Home = () => {
   const fetchData = async () => {
     try {
       // fetch data from API
-    const response = await fetch('https://api.escuelajs.co/api/v1/products');
+      // ANTERIOR API GET QUE USAMOS
+      // https://api.escuelajs.co/api/v1/products
+      // OTRA API GET MAS LIMPIA https://fakestoreapi.com/products
+    const response = await fetch('https://fakestoreapi.com/products');
     console.log(response);
     const data = await response.json();
     console.log(data);
