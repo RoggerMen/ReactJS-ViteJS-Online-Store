@@ -6,9 +6,9 @@ import MyOrders from '../MyOrders'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar'
+import ShoppingCartContextProvider from '../../Context'
 
 const AppRoutes = () =>{
-
   let routes = useRoutes([
     { path: '/', element: <Home />},
     { path: '/my-account', element: <MyAccount />},
@@ -23,10 +23,12 @@ const AppRoutes = () =>{
 const App = () =>{
 
   return (
-    <BrowserRouter>
-      <AppRoutes />
-      <Navbar />
-    </BrowserRouter>
+    <ShoppingCartContextProvider>
+      <BrowserRouter>
+        <AppRoutes />
+        <Navbar />
+      </BrowserRouter>
+    </ShoppingCartContextProvider>
   )
 }
 
