@@ -34,7 +34,6 @@ const Card = ({item}) => {
     context.setCartProducts([...context.cartProducts, productData])
 
     context.openCheckoutSideMenu();
-    console.log("CART: " ,context.cartProducts)
   }
 
   return (
