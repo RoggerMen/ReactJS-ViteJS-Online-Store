@@ -3,6 +3,7 @@ import "./style.css";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
+import { totalPrice } from "../../utils";
 
 // EL COMPONENTE CheckoutSideMenu LO MANDAMOS PARA EL PRINCIPAL PORQUE ESTE VA A NAVEGAR EN TODAS LAS PAGINAS(RUTAS)
 const CheckoutSideMenu = () => {
@@ -14,6 +15,7 @@ const CheckoutSideMenu = () => {
   //context.productToShow?.images &&
   //context.productToShow.images[0]?.replace(/^\[|"|\]$/g, "");
 
+  // FUNCION ELIMINAR UN PRODUCTO DEL CARRITO
   // EL "id" como son únicos este es el único elemento que nos va a permitir saber quien es el elemento que presionemos 
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(product => product.id != id)
@@ -36,7 +38,7 @@ const CheckoutSideMenu = () => {
           }}
         ></XMarkIcon>
       </div>
-      
+      {/*Todos los productos que tenemos en la orden */}
       <div className="py-4">
 
       {
@@ -51,6 +53,14 @@ const CheckoutSideMenu = () => {
         ))
       }
 
+      </div>
+
+      {/*Tipo especie de footer */}
+      <div className="px-2">
+        <p className="flex justify-between">
+          <span className="text-xl font-semibold">Total:</span>
+          <span className="text-xl font-bold">${totalPrice(context.cartProducts)}</span>
+        </p>
       </div>
 
     </aside>
