@@ -22,14 +22,26 @@ const CheckoutSideMenu = () => {
     context.setCartProducts(filteredProducts)
   }
 
+  // FUNCION VERIFICAR EL PRODUCTO DEL CARRITO
+  const handleCheckout= () => {
+    const orderToAdd = {
+      date: '01.02.25',
+      producst: context.cartProducts,
+      totalProducts: context.cartProducts.length,
+      totalPrice: totalPrice(context.cartProducts)
+    }
+    context.setOrder([...context.order, orderToAdd])
+    context.setCartProducts([])
+  }
+
   return (
     <aside
       className={`${
         context.isCheckoutSideMenuOpen ? "flex" : "hidden"
-      } checkout-side-menu flex flex-col overflow-y-scroll fixed right-0 border border-black rounded-lg bg-white p-6 `}
+      } checkout-side-menu flex flex-col fixed right-0 border border-black rounded-lg bg-white p-6 `}
     >
       
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         <h2 className="font-medium text-xl">My Order</h2>
         <XMarkIcon
           className="size-6 text-blue-950 cursor-pointer"
@@ -39,7 +51,7 @@ const CheckoutSideMenu = () => {
         ></XMarkIcon>
       </div>
       {/*Todos los productos que tenemos en la orden */}
-      <div className="py-4">
+      <div className="py-4 overflow-y-auto flex-1">
 
       {
         context.cartProducts.map((product) => (
@@ -57,10 +69,12 @@ const CheckoutSideMenu = () => {
 
       {/*Tipo especie de footer */}
       <div className="px-2">
-        <p className="flex justify-between">
-          <span className="text-xl font-semibold">Total:</span>
+        <p className="flex justify-between items-center">
+          <span className="text-xl font-semibold mt-3">Total:</span>
           <span className="text-xl font-bold">${totalPrice(context.cartProducts)}</span>
         </p>
+        {/* Botón de checkout */}
+        <button className="w-full mt-4 bg-blue-950 text-white font-medium py-2 rounded-md" onClick={()=> handleCheckout()}>Checkout</button>
       </div>
 
     </aside>

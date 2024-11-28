@@ -37,6 +37,9 @@ const ShoppingCartContextProvider = ({children}) => {
   // TAMBIEN PODEMOS HACERLO CON UN "useEffect" PARA VER EL "clg" SOLO CUANDO CAMBIE EL "cartProducts"
   //console.log("CART: " ,cartProducts)
 
+  // Shopping Cart - Order
+  const [order,setOrder] = useState([]);
+
   return (
     <ShoppingCartContext.Provider value={{
         count,
@@ -51,6 +54,8 @@ const ShoppingCartContextProvider = ({children}) => {
         isCheckoutSideMenuOpen,
         openCheckoutSideMenu,
         closeCheckoutSideMenu,
+        order,
+        setOrder,
     }}>
         {children}
     </ShoppingCartContext.Provider>
