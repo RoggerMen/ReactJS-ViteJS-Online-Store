@@ -7,8 +7,8 @@ import OrderCard from "../OrderCard";
 // EL COMPONENTE CheckoutSideMenu LO MANDAMOS PARA EL PRINCIPAL PORQUE ESTE VA A NAVEGAR EN TODAS LAS PAGINAS(RUTAS)
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
+  //console.log("CART: " ,context.cartProducts)
   
-  console.log("CART: " ,context.cartProducts)
   //console.log('PRODUCT TO SHOW: ' , context.productToShow);
   //const processedImageUrl =
   //context.productToShow?.images &&
@@ -17,7 +17,7 @@ const CheckoutSideMenu = () => {
     <aside
       className={`${
         context.isCheckoutSideMenuOpen ? "flex" : "hidden"
-      } checkout-side-menu flex flex-col overflow-y-auto fixed right-0 border border-black rounded-lg bg-white p-6 `}
+      } checkout-side-menu flex flex-col overflow-y-scroll fixed right-0 border border-black rounded-lg bg-white p-6 `}
     >
       
       <div className="flex justify-between items-center">
