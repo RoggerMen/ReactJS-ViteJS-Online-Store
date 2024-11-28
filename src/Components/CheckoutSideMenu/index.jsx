@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
 import { totalPrice } from "../../utils";
+import { Link } from "react-router-dom";
 
 // EL COMPONENTE CheckoutSideMenu LO MANDAMOS PARA EL PRINCIPAL PORQUE ESTE VA A NAVEGAR EN TODAS LAS PAGINAS(RUTAS)
 const CheckoutSideMenu = () => {
@@ -26,7 +27,7 @@ const CheckoutSideMenu = () => {
   const handleCheckout= () => {
     const orderToAdd = {
       date: '01.02.25',
-      producst: context.cartProducts,
+      products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts)
     }
@@ -74,7 +75,9 @@ const CheckoutSideMenu = () => {
           <span className="text-xl font-bold">${totalPrice(context.cartProducts)}</span>
         </p>
         {/* Botón de checkout */}
-        <button className="w-full mt-4 bg-blue-950 text-white font-medium py-2 rounded-md" onClick={()=> handleCheckout()}>Checkout</button>
+        <Link to='my-orders/last'>
+          <button className="w-full mt-4 bg-blue-950 text-white font-medium py-2 rounded-md" onClick={()=> handleCheckout()}>Checkout</button>
+        </Link>
       </div>
 
     </aside>
