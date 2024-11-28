@@ -13,6 +13,13 @@ const CheckoutSideMenu = () => {
   //const processedImageUrl =
   //context.productToShow?.images &&
   //context.productToShow.images[0]?.replace(/^\[|"|\]$/g, "");
+
+  // EL "id" como son únicos este es el único elemento que nos va a permitir saber quien es el elemento que presionemos 
+  const handleDelete = (id) => {
+    const filteredProducts = context.cartProducts.filter(product => product.id != id)
+    context.setCartProducts(filteredProducts)
+  }
+
   return (
     <aside
       className={`${
@@ -35,9 +42,11 @@ const CheckoutSideMenu = () => {
       {
         context.cartProducts.map((product) => (
           <OrderCard key={product.id} 
+            id={product.id}
             title={product.title} 
             imageUrl={product.image}
             price={product.price}
+            handleDelete={handleDelete}
           />
         ))
       }
