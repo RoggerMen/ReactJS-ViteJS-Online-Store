@@ -6,7 +6,7 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import { CheckIcon } from "@heroicons/react/24/solid";
 
 const Card = ({item}) => {
-  //const imageUrl = item?.images[0]?.replace(/^\[|"|\]$/g, '');
+  const imageUrl = item?.images[0]?.replace(/^\[|"|\]$/g, '');
 
   const context = useContext(ShoppingCartContext);
 
@@ -71,16 +71,16 @@ const Card = ({item}) => {
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 my-2"
     onClick={()=>showProduct(item)}>
         <figure className='relative mb-1 w-full h-4/5 ' >
-            <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{item?.category}</span>
+            <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{item?.category.name}</span>
             <img className="w-full h-full object-cover rounded-lg"
-            src={item?.image} alt={item?.title} />
+            src={imageUrl} alt={item?.title} />
             
             {renderIcon(item.id)}
             
         </figure>
         <p className="flex justify-between">
             <span className="text-sm font-light px-2">{item?.title}</span>
-            <span className="text-lg font-semibold px-2 py-1.5">${item.price}</span>
+            <span className="text-lg font-semibold px-2 py-1.5">${item?.price}</span>
         </p>
     </div>
   )

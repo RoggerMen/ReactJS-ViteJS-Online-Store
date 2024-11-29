@@ -4,6 +4,9 @@ const OrderCard = (props) => {
   
   const { id, title, imageUrl, price, handleDelete } = props;
 
+  const processedImageUrl = imageUrl &&
+  imageUrl[0]?.replace(/^\[|"|\]$/g, '');
+
   // SI "handleDelete" viene osea tiene los datos entra y renderiza el icono
   // Y SI NO PUES NO ENTRARIA EN EL "if" Y NO RENDERIZARIA NADA
   let renderXMarkIcon
@@ -15,7 +18,7 @@ const OrderCard = (props) => {
     <div className="flex justify-between items-center mb-4">
       <div className="flex items-center gap-2">
         <figure className="w-20 h-20">
-          <img className="w-full h-full rounded-lg object-cover" src={imageUrl} alt={title} />
+          <img className="w-full h-full rounded-lg object-cover" src={processedImageUrl} alt={title} />
         </figure>
         <p className="text-sm font-light">{title}</p>
       </div>

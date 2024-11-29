@@ -9,12 +9,7 @@ import { Link } from "react-router-dom";
 // EL COMPONENTE CheckoutSideMenu LO MANDAMOS PARA EL PRINCIPAL PORQUE ESTE VA A NAVEGAR EN TODAS LAS PAGINAS(RUTAS)
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
-  //console.log("CART: " ,context.cartProducts)
-  
-  //console.log('PRODUCT TO SHOW: ' , context.productToShow);
-  //const processedImageUrl =
-  //context.productToShow?.images &&
-  //context.productToShow.images[0]?.replace(/^\[|"|\]$/g, "");
+  console.log("CART: " ,context.cartProducts)
 
   // FUNCION ELIMINAR UN PRODUCTO DEL CARRITO
   // EL "id" como son únicos este es el único elemento que nos va a permitir saber quien es el elemento que presionemos 
@@ -59,7 +54,7 @@ const CheckoutSideMenu = () => {
           <OrderCard key={product.id} 
             id={product.id}
             title={product.title} 
-            imageUrl={product.image}
+            imageUrl={product.images}
             price={product.price}
             handleDelete={handleDelete}
           />

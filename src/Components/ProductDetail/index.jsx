@@ -5,10 +5,10 @@ import { ShoppingCartContext } from "../../Context";
 
 const ProductDetail = () => {
   const context = useContext(ShoppingCartContext);
-  //console.log('PRODUCT TO SHOW: ' , context.productToShow);
-  //const processedImageUrl =
-  //context.productToShow?.images &&
-  //context.productToShow.images[0]?.replace(/^\[|"|\]$/g, "");
+  console.log('PRODUCT TO SHOW: ' , context.productToShow);
+  const processedImageUrl =
+  context.productToShow?.images &&
+  context.productToShow.images[0]?.replace(/^\[|"|\]$/g, "");
   return (
     <aside
       className={`${
@@ -26,7 +26,7 @@ const ProductDetail = () => {
       </div>
       <figure className="px-6">
         <img className="w-full h-full object-cover rounded-lg" 
-        src={context.productToShow.image} 
+        src={processedImageUrl} 
         alt={context.productToShow.title} />
       </figure>
       <p className="flex flex-col p-6">

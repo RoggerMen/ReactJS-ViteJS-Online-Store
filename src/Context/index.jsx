@@ -49,7 +49,7 @@ const ShoppingCartContextProvider = ({children}) => {
       // ANTERIOR API GET QUE USAMOS
       // https://api.escuelajs.co/api/v1/products
       // OTRA API GET MAS LIMPIA https://fakestoreapi.com/products
-    const response = await fetch('https://fakestoreapi.com/products');
+    const response = await fetch('https://api.escuelajs.co/api/v1/products');
     console.log(response);
     const data = await response.json();
     console.log(data);
@@ -77,6 +77,17 @@ const ShoppingCartContextProvider = ({children}) => {
     if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
   }, [items, searchByTitle]);
 
+  // SEARCH BY CATEGORIES
+  const [searchByCategory,setSearchByCategory] = useState(null);
+
+  const filteredItemsByCategory = (items, searchByCategory) => {
+    return items?.filter(item => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase())) 
+  }
+
+  useEffect(() => {
+    if(searchByCategory) setFilteredItems(filteredItemsByCategory(items, searchByCategory))
+  }, [items, searchByCategory]);
+
   
   return (
     <ShoppingCartContext.Provider value={{
@@ -98,7 +109,9 @@ const ShoppingCartContextProvider = ({children}) => {
         setItems,
         searchByTitle,
         setSearchByTitle,
-        filteredItems
+        filteredItems,
+        searchByCategory,
+        setSearchByCategory,
     }}>
         {children}
     </ShoppingCartContext.Provider>
