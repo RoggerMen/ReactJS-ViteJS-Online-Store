@@ -66,6 +66,18 @@ const ShoppingCartContextProvider = ({children}) => {
   // GET PRODUCTS BY TITLE
   const [searchByTitle,setSearchByTitle] = useState(null);
 
+  // CORRESPONDE A LOS ITEMS QUE SEAN FILTRADOS DEPENDIENDO DE LO QUE ESCRIBAMOS EN ESE INPUT DEL BUSCADOR
+  const [filteredItems,setFilteredItems] = useState(null);
+
+  const filteredItemsByTitle = (items, searchByTitle) => {
+    return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase())) 
+  }
+
+  useEffect(() => {
+    if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
+  }, [items, searchByTitle]);
+
+  
   return (
     <ShoppingCartContext.Provider value={{
         count,
@@ -85,7 +97,8 @@ const ShoppingCartContextProvider = ({children}) => {
         items,
         setItems,
         searchByTitle,
-        setSearchByTitle
+        setSearchByTitle,
+        filteredItems
     }}>
         {children}
     </ShoppingCartContext.Provider>
