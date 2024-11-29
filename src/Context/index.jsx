@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 export const ShoppingCartContext = createContext();
 const ShoppingCartContextProvider = ({children}) => {
@@ -40,6 +40,32 @@ const ShoppingCartContextProvider = ({children}) => {
   // Shopping Cart - Order
   const [order,setOrder] = useState([]);
 
+  // GET PRODUCTS
+  const [items,setItems] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      // fetch data from API
+      // ANTERIOR API GET QUE USAMOS
+      // https://api.escuelajs.co/api/v1/products
+      // OTRA API GET MAS LIMPIA https://fakestoreapi.com/products
+    const response = await fetch('https://fakestoreapi.com/products');
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    setItems(data);
+    } catch (error) {
+      console.log("Al buscar el API hubo este ERROR: " + error );
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // GET PRODUCTS BY TITLE
+  const [searchByTitle,setSearchByTitle] = useState(null);
+
   return (
     <ShoppingCartContext.Provider value={{
         count,
@@ -56,6 +82,10 @@ const ShoppingCartContextProvider = ({children}) => {
         closeCheckoutSideMenu,
         order,
         setOrder,
+        items,
+        setItems,
+        searchByTitle,
+        setSearchByTitle
     }}>
         {children}
     </ShoppingCartContext.Provider>
